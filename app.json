@@ -2,7 +2,5 @@
   "name": "Certificate dashboard",
   "description": "SSL dashboard",
   "repository": "https://github.com/JensDebergh/certificate-dashboard",
-  "logo": "",
-  "keywords": ["node", "express", "static"],
-  "image": ""
+  "keywords": ["node", "express", "static"]
 }
