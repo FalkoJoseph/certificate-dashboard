@@ -29,28 +29,30 @@ function getCertificationData() {
 
 function _getRequestPromise(host) {
   return new Promise(function(resolve, reject) {
-    var req = https.request({ hostname: host, port: 443, method: 'GET'}, function(res) {
-      var cert = res.connection.getPeerCertificate();
-      var parsed = {
-        'server': host,
-        'subject': {
-          'org': cert.subject.O,
-          'common_name': cert.subject.CN,
-          'sans': cert.subjectaltname
-        },
-        'issuer': {
-          'org': cert.issuer.O,
-          'common_name': cert.issuer.CN
-        },
-        'info': {
-          'valid_from': Utils.parseDate(cert.valid_from),
-          'valid_to': Utils.parseDate(cert.valid_to),
-          'days_left': Utils.getDaysLeft(cert.valid_to)
-        }
-      };
+    var req = https.request(
+      { hostname: host, port: 443, method: 'GET', agent: false },
+      function(res) {
+        var cert = res.connection.getPeerCertificate();
+        var parsed = {
+          'server': host,
+          'subject': {
+            'org': cert.subject.O,
+            'common_name': cert.subject.CN,
+            'sans': cert.subjectaltname
+          },
+          'issuer': {
+            'org': cert.issuer.O,
+            'common_name': cert.issuer.CN
+          },
+          'info': {
+            'valid_from': Utils.parseDate(cert.valid_from),
+            'valid_to': Utils.parseDate(cert.valid_to),
+            'days_left': Utils.getDaysLeft(cert.valid_to)
+          }
+        };
 
-      resolve(parsed);
-    });
+        resolve(parsed);
+      });
     req.end()
 
     req.on('timeout',  function (err) {
