@@ -16,10 +16,16 @@ app.get('/', function(request, response) {
   var promise = certificate.getCertificationData();
 
   certificate.getCertificationData().then(function(data) {
-    response.render('pages/index', {
+    responseData = {
       certInfo: JSON.stringify(data),
       runDate: new Date().toDateString()
-    });
+    }
+
+    if(request.headers['content-type'] == 'application/json') {
+      response.json(responseData);
+    } else {
+      response.render('pages/index', responseData);
+    }
   });
 });
 
