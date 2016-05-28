@@ -3,6 +3,9 @@ var MONITORED_CERT_HOSTS = process.env.MONITORED_CERT_HOSTS
 module.exports = monitoredHosts();
 
 function monitoredHosts() {
+  if(typeof MONITORED_CERT_HOSTS == '')
+    throw new Error('Empty string environment variable MONITORED_CERT_HOSTS provided.');
+
   if(typeof MONITORED_CERT_HOSTS == 'undefined')
     throw new Error('Missing environment variable MONITORED_CERT_HOSTS.');
 

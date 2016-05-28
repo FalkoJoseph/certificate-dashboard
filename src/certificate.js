@@ -5,8 +5,6 @@ const config = require('./config');
 const monitoredHosts = require('./monitored-hosts.js');
 
 function getCertificationData() {
-  const run_date = new Date().toDateString();
-
   var promises = [];
 
   for (var i = 0; i < monitoredHosts.length; ++i) {
@@ -33,35 +31,44 @@ function _getRequestPromise(host) {
       { hostname: host, port: 443, method: 'GET', agent: false },
       function(res) {
         var cert = res.connection.getPeerCertificate();
-        var parsed = {
-          'server': host,
-          'subject': {
-            'org': cert.subject.O,
-            'common_name': cert.subject.CN,
-            'sans': cert.subjectaltname
-          },
-          'issuer': {
-            'org': cert.issuer.O,
-            'common_name': cert.issuer.CN
-          },
-          'info': {
-            'valid_from': Utils.parseDate(cert.valid_from),
-            'valid_to': Utils.parseDate(cert.valid_to),
-            'days_left': Utils.getDaysLeft(cert.valid_to)
-          }
-        };
+        var certificateInfo = _getCertificateInfo(host, cert);
 
-        resolve(parsed);
+        resolve(certificateInfo);
       });
     req.end()
+    req.setTimeout(config.connectionTimeout);
 
     req.on('timeout',  function (err) {
       this.abort();
-      reject(err);
+      resolve(_getCertificateInfo(host, {}))
     });
 
-
+    req.on('error', function(err) {
+      if(err.code == 'ECONNREFUSED') {
+        resolve(_getCertificateInfo(host, {}));
+      }
+    });
   });
+}
+
+function _getCertificateInfo(host, certificate) {
+  return {
+    'server': host,
+    'subject': {
+      'org': certificate.subject ? certificate.subject.O : '-',
+      'common_name': certificate.subject ? certificate.subject.CN : '-',
+      'sans': certificate.subject ? certificate.subjectaltname : '-'
+    },
+    'issuer': {
+      'org': certificate.issuer ? certificate.issuer.O : '-',
+      'common_name': certificate.issuer ? certificate.issuer.CN : '-'
+    },
+    'info': {
+      'valid_from': Utils.parseDate(certificate.valid_from),
+      'valid_to': Utils.parseDate(certificate.valid_to),
+      'days_left': certificate.valid_to ? Utils.getDaysLeft(certificate.valid_to): '-'
+    }
+  };
 }
 
 module.exports = {

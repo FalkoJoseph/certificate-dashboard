@@ -7,7 +7,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha 'test/**/*.js'",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "ejs": "2.4.1",
@@ -23,5 +25,9 @@
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
 }
