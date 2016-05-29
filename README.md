@@ -1,4 +1,4 @@
-# Certification check
+# Certificate dashboard
 
 Responsive web app that checks when certificates will expire. Serves HTML & JSON so you can consume the service elsewhere.
 
