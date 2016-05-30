@@ -12,6 +12,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "ejs": "2.4.1",
     "express": "4.13.3",
     "promise": "^7.1.1"
