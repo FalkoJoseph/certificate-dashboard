@@ -1,4 +1,4 @@
-# Certificate dashboard
+# Certificate dashboard [Original project](https://github.com/cmrunton/tls-dashboard)
 
 Responsive web app that checks when certificates will expire. Serves HTML & JSON so you can consume the service elsewhere.
 
@@ -32,9 +32,3 @@ $ heroku open
 or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## [Original project](https://github.com/cmrunton/tls-dashboard)
-
-Author: [cmrunton](https://github.com/cmrunton) 
-
-
