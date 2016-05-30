@@ -32,6 +32,8 @@ or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-## Original author
+## [Original project](https://github.com/cmrunton/tls-dashboard)
 
-I've seen a static version of this project on github, but I forgot the name of the original project. It is his static version of the dashboard turned into a configurable service that spits out HTML & JSON.
+Author: [cmrunton](https://github.com/cmrunton) 
+
+
