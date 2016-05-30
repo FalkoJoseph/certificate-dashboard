@@ -10,10 +10,11 @@ Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https
 
 ```sh
 $ npm install
+$ cp .env.sample .env
 $ foreman s
 ```
 
-Environment variables
+Environment variables (may be set locally in `.env`)
 
 ```sh
 MONITORED_CERT_HOSTS="www.mysitethatsupportssl.com, www.othersitessl.com"
@@ -26,6 +27,7 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 ```
 $ heroku create
 $ git push heroku master
+$ heroku config:set MONITORED_CERT_HOSTS="www.mysitethatsupportssl.com, www.othersitessl.com"
 $ heroku open
 ```
 or
