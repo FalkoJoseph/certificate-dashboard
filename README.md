@@ -9,7 +9,7 @@ Responsive web app that checks when certificates will expire. Serves HTML & JSON
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 ```sh
-$ npm install
+$ bin/setup
 $ foreman s
 ```
 
@@ -35,6 +35,6 @@ or
 
 ## [Original project](https://github.com/cmrunton/tls-dashboard)
 
-Author: [cmrunton](https://github.com/cmrunton) 
+Author: [cmrunton](https://github.com/cmrunton)
 
 
