@@ -13,8 +13,6 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  var promise = certificate.getCertificationData();
-
   certificate.getCertificationData().then(function(data) {
     responseData = {
       certInfo: JSON.stringify(data),
